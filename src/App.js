@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import { NotFound, PrivateRoute } from './components/Common';
+import { AdminLayout, CustomerLayout } from './components/Layout';
+import LoginPage from './features/auth/pages/LoginPage';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/login">
+        <LoginPage />
+      </Route>
+      <PrivateRoute path="/admin">
+        <AdminLayout />
+      </PrivateRoute>
+      <Route path="/">
+        <CustomerLayout />
+      </Route>
+      <Route>
+        <NotFound />
+      </Route>
+    </Switch>
   );
 }
 
